@@ -18,7 +18,7 @@ public class LcdController {
     public void displayNoInput() {
         lcd.clear();
         lcd.write(0, "No input found!");
-        lcd.setColor(GpioLcdDisplay.Color.BLUE);
+        lcd.setColor(GpioLcdDisplay.Color.RED);
     }
 
     public void displayInput() {
