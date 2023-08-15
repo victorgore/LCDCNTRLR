@@ -19,12 +19,17 @@ public class LedController {
         ledPin.low();
     }
 
-    public void setColor(boolean hasPower) {
+    public void setColor(boolean hasPower, boolean lowPower) {
         if (hasPower) {
             // If there is power, turn the LED blue
             ledPin.setPwm(0);
             ledPin.setPwmRange(255);
             ledPin.setPwm(0); // blue
+        } else if (lowPower) {
+            // If the power is cut and low power mode, turn the LED yellow
+            ledPin.setPwm(0);
+            ledPin.setPwmRange(255);
+            ledPin.setPwm(127); // yellow (mix of red and green)
         } else {
             // If the power is cut, turn the LED red
             ledPin.setPwm(0);
@@ -36,9 +41,10 @@ public class LedController {
     public static void main(String[] args) throws InterruptedException {
         LedController ledController = new LedController();
         while (true) {
-            // check the power status here
+            // Check power status and low power mode
             boolean hasPower = true;
-            ledController.setColor(hasPower);
+            boolean lowPower = false; // Replace with actual low power detection
+            ledController.setColor(hasPower, lowPower);
             TimeUnit.SECONDS.sleep(1);
         }
     }
